@@ -10,7 +10,10 @@ public class TableStateController : MonoBehaviour
     [SerializeField] private float _waitPlayerTime;
     [SerializeField] private float _emptyTime;
     [SerializeField] private float _eatingTime;
+    [SerializeField] private TableAnimator _tableAnimator;
+
     public TableState TableState { get; private set; }
+
     private IEnumerator _coroutine;
 
     public void StopCurrentCoroutine()
@@ -28,6 +31,19 @@ public class TableStateController : MonoBehaviour
     private IEnumerator WaitForPlayerTime()
     {
         yield return new WaitForSeconds(_emptyTime);
+        _tableAnimator.ShowVisitor();
+        TableState = TableState.Prepare;
+        yield return new WaitForSeconds(_prepareTime);
+        TableState = TableState.WaitForPlayer;
+        yield return new WaitForSeconds(_waitPlayerTime);
+        LeaveTheTable();
+    }
+
+    public void LeaveTheTable()
+    {
+        StopAllCoroutines();
+        TableState = TableState.Empty;
+        _tableAnimator.HideVisitor();
     }
 
 
