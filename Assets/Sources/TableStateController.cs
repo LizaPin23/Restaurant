@@ -11,7 +11,7 @@ public class TableStateController : MonoBehaviour
     [SerializeField] private float _emptyTime;
     [SerializeField] private float _eatingTime;
     public TableState TableState { get; private set; }
-    private Coroutine _coroutine;
+    private IEnumerator _coroutine;
 
     public void StopCurrentCoroutine()
     {
@@ -21,12 +21,13 @@ public class TableStateController : MonoBehaviour
     public void StartTableWork()
     {
         TableState = TableState.Empty;
-        StartCoroutine();
+        _coroutine = WaitForPlayerTime();
+        StartCoroutine(_coroutine);
     }
 
     private IEnumerator WaitForPlayerTime()
     {
-
+        yield return new WaitForSeconds(_emptyTime);
     }
 
 
