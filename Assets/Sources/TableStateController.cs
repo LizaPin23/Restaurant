@@ -39,11 +39,39 @@ public class TableStateController : MonoBehaviour
         LeaveTheTable();
     }
 
+    private IEnumerator WaitForFoodTime()
+    {
+        //оно включается с помощью метода СтартВейтФудКорутин
+        TableState = TableState.WaitForFood;
+        yield return new WaitForSeconds(_waitFoodTime);
+        LeaveTheTable();
+    }
+
+    private IEnumerator EatingTime()
+    {
+        //оно включается с помощью метода СтартИтингКорутин
+        TableState = TableState.Eating;
+        yield return new WaitForSeconds(_eatingTime);
+        LeaveTheTable();
+    }
+
     public void LeaveTheTable()
     {
         StopAllCoroutines();
         TableState = TableState.Empty;
         _tableAnimator.HideVisitor();
+    }
+
+    public void StartWaitFoodCoroutine()
+    {
+        _coroutine = WaitForFoodTime();
+        StartCoroutine(_coroutine);
+    }
+
+    public void StartEatingCoroutine()
+    {
+        _coroutine = EatingTime();
+        StartCoroutine(_coroutine);
     }
 
 
