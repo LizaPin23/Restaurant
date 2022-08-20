@@ -5,23 +5,24 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    [SerializeField] private TableStateController _tableState;
+    [SerializeField] private TableState _tableState;
+    [SerializeField] private TableStateController _tableStateController;
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerFoodHandler player = other.GetComponent<PlayerFoodHandler>();
 
-        if(player == null)
+
+        switch(_tableState)
         {
-            _tableState.LeaveTheTable();
+            default:
+                return;
+            case TableState.WaitForPlayer:
+                _tableStateController.StartWaitFoodCoroutine();
+            case TableState.WaitForFood:
+                _tableStateController.StartEatingCoroutine();
+
         }
-
-        if(player == true)
-        {
-            _tableState.StartWaitFoodCoroutine();
-        }
-
-
     }
 }
