@@ -4,19 +4,36 @@ using UnityEngine;
 
 public class PlayerFoodHandler : MonoBehaviour
 {
-    private FoodType _food = FoodType.None;
+    [SerializeField] private Money _money;
 
-    public void BringFood(FoodType food)
+    public Food CurrentFood { get; private set; }
+    public bool HasFood => CurrentFood != null;
+
+    public void GetFoodFromKitchen(Food food)
     {
-        _food = food;
-        Debug.Log(food);
+        bool hasMoney = _money.TryDecrease(food.KitchenPrice);
+
+        if (hasMoney)
+        {
+            CurrentFood = food;
+        }
+        else
+        {
+            Debug.Log("Не хватает денег!");
+        }
     }
 
-    public Food ServeFood()
+    public bool TryServeFood(Food expectedFood)
     {
-        FoodType food = _food;
-        _food = FoodType.None;
-        return new Food();
+        if (expectedFood.Type == CurrentFood.Type)
+        {
+            _money.Increase(expectedFood.TablePrice);
+            CurrentFood = null;
+            return true;
+        }
+
+        CurrentFood = null;
+        return false;
     }
 
 }

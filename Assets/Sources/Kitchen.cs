@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Kitchen : MonoBehaviour
 {
-    [SerializeField] private FoodConfick _config;
+    [SerializeField] private FoodConfig _config;
     [SerializeField] private ParticleSystem _effect;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -17,7 +17,7 @@ public class Kitchen : MonoBehaviour
             return;
         }
 
-        player.BringFood(_config);
+        player.GetFoodFromKitchen(new Food(_config));
 
         _effect.Play();
     }

@@ -5,24 +5,65 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    [SerializeField] private TableState _tableState;
+    [SerializeField] private TableBubble _bubble;
     [SerializeField] private TableStateController _tableStateController;
+    [SerializeField] private Menu _menu;
 
+    private Food _currentOrder;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        PlayerFoodHandler player = other.GetComponent<PlayerFoodHandler>();
+        _tableStateController.StartTableWork();
+    }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        PlayerFoodHandler player = other.gameObject.GetComponent<PlayerFoodHandler>();
 
-        switch(_tableState)
+        if (player == null)
+            return;
+
+        Debug.Log(_tableStateController.TableState);
+
+        switch (_tableStateController.TableState)
         {
             default:
                 return;
             case TableState.WaitForPlayer:
-                _tableStateController.StartWaitFoodCoroutine();
+                OnWaitForPlayer();
+                break;
             case TableState.WaitForFood:
-                _tableStateController.StartEatingCoroutine();
+                OnWaitForFood(player);
+                break;
 
+        }
+    }
+
+    private void OnWaitForPlayer()
+    {
+        _tableStateController.StopCurrentCoroutine();
+
+        _currentOrder = _menu.GetRandomFood();
+
+        _tableStateController.StartWaitFoodCoroutine();
+        _bubble.BubbleWaitForFood(_currentOrder.Icon);
+    }
+
+    private void OnWaitForFood(PlayerFoodHandler player)
+    {
+        if (player.HasFood == false)
+            return;
+
+        _tableStateController.StopCurrentCoroutine();
+        bool isFoodCorrect = player.TryServeFood(_currentOrder);
+
+        if (isFoodCorrect)
+        {
+            _tableStateController.StartEatingCoroutine();
+        }
+        else
+        {
+            _tableStateController.LeaveTheTable();
         }
     }
 }

@@ -231,6 +231,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table2
       objectReference: {fileID: 0}
+    - target: {fileID: 3548287950715839780, guid: 765ed06b0a3087b429a62e2f2f16cc3a,
+        type: 3}
+      propertyPath: _menu
+      value: 
+      objectReference: {fileID: 898699283}
     - target: {fileID: 4521314083160381601, guid: 765ed06b0a3087b429a62e2f2f16cc3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -830,6 +835,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table1
       objectReference: {fileID: 0}
+    - target: {fileID: 3760559281280205948, guid: 98f4edc62ce435144a777859d0a333ca,
+        type: 3}
+      propertyPath: _menu
+      value: 
+      objectReference: {fileID: 898699283}
     - target: {fileID: 4301169223373748729, guid: 98f4edc62ce435144a777859d0a333ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5860,10 +5870,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe9dc99e95858a4b9e1a7d7c03d070f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iceCreamPrice: 200
-  _pizzaPrice: 400
-  _iceCreamCost: 50
-  _pizzaCost: 100
+  _foodConfigs:
+  - {fileID: 11400000, guid: 9581a1d820fd32a44a01c617045ef3e3, type: 2}
+  - {fileID: 11400000, guid: ce0514e224fc66d419c49298cee778e4, type: 2}
 --- !u!4 &898699284
 Transform:
   m_ObjectHideFlags: 0
@@ -6047,6 +6056,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.050000556
       objectReference: {fileID: 0}
+    - target: {fileID: 2806450937742102337, guid: 6220a9f2b75638940b8a337b752958be,
+        type: 3}
+      propertyPath: _menu
+      value: 
+      objectReference: {fileID: 898699283}
     - target: {fileID: 3787031052695378022, guid: 6220a9f2b75638940b8a337b752958be,
         type: 3}
       propertyPath: m_Name
@@ -6248,7 +6262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _money: {fileID: 940073452}
-  _menu: {fileID: 898699283}
 --- !u!114 &1075954757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6738,6 +6751,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.57
       objectReference: {fileID: 0}
+    - target: {fileID: 5059944345657810747, guid: 64393de2e17119c48a591c410d24e9cd,
+        type: 3}
+      propertyPath: _menu
+      value: 
+      objectReference: {fileID: 898699283}
     - target: {fileID: 5312113071368938174, guid: 64393de2e17119c48a591c410d24e9cd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6931,6 +6949,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 916991140848647356, guid: a874c0cf921ec9d458d9b757f4ddd451,
+        type: 3}
+      propertyPath: _config
+      value: 
+      objectReference: {fileID: 11400000, guid: 9581a1d820fd32a44a01c617045ef3e3,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a874c0cf921ec9d458d9b757f4ddd451, type: 3}
 --- !u!1 &1712170895
@@ -7213,6 +7237,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5078975394820461618, guid: c7b07824776394a4fbf7e8cf0a39ca8f,
+        type: 3}
+      propertyPath: _config
+      value: 
+      objectReference: {fileID: 11400000, guid: ce0514e224fc66d419c49298cee778e4,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7b07824776394a4fbf7e8cf0a39ca8f, type: 3}
 --- !u!1 &1980385198

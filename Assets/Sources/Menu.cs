@@ -4,35 +4,12 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] private int _iceCreamPrice = 200;
-    [SerializeField] private int _pizzaPrice = 400;
-    [SerializeField] private int _iceCreamCost = 50;
-    [SerializeField] private int _pizzaCost = 100;
+    [SerializeField] private FoodConfig[] _foodConfigs;
 
-    public int GetPrice(FoodType type)
+    public Food GetRandomFood()
     {
-        switch (type)
-        {
-            default:
-                return 0;
-            case FoodType.IceCream:
-                return _iceCreamPrice;
-            case FoodType.Pizza:
-                return _pizzaPrice;
-
-        }
-    }
-    public int GetCost(FoodType type)
-    {
-        switch (type)
-        {
-            default:
-                return 0;
-            case FoodType.IceCream:
-                return _iceCreamCost;
-            case FoodType.Pizza:
-                return _pizzaCost;
-
-        }
+        int index = Random.Range(0, _foodConfigs.Length);
+        FoodConfig config = _foodConfigs[index];
+        return new Food(config);
     }
 }

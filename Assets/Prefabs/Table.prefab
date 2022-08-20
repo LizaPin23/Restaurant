@@ -317,7 +317,6 @@ GameObject:
   - component: {fileID: 8738453972829651102}
   - component: {fileID: 5423231522465643723}
   - component: {fileID: 497062232542294101}
-  - component: {fileID: 1008679361800629445}
   - component: {fileID: 2694365865670526996}
   - component: {fileID: 5694955490132574053}
   m_Layer: 0
@@ -368,11 +367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5d6f78c4278464f8ab3724c693f074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stateController: {fileID: 5694955490132574053}
-  _minAmountOrder: 1
-  _maxAmountOrder: 1
-  _visitorController: {fileID: 9060561800148922769}
-  _effect: {fileID: 5618850244857311884}
+  _bubble: {fileID: 7170558717808031956}
+  _tableStateController: {fileID: 5694955490132574053}
+  _menu: {fileID: 0}
 --- !u!61 &5423231522465643723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -416,18 +413,6 @@ MonoBehaviour:
   _boolNameThree: VisitorBoolThree
   _boolNameTwo: TwoBool
   _boolNameFour: FourBool
---- !u!114 &1008679361800629445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7726348991188359097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b946589dd92ca8d408301b401812699f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &2694365865670526996
 Animator:
   serializedVersion: 3
@@ -459,14 +444,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a0d8318c5e62645a681d0e84eff4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emptyTime: 5
+  _bubble: {fileID: 7170558717808031956}
+  _waitFoodTime: 0
   _prepareTime: 10
-  _waitForPlayerTime: 13
-  _waitForFoodTime: 17
+  _waitPlayerTime: 0
+  _emptyTime: 5
   _eatingTime: 7
   _tableAnimator: {fileID: 497062232542294101}
-  _tableBubble: {fileID: 7170558717808031956}
-  End: 0
 --- !u!1 &7766480914433809118
 GameObject:
   m_ObjectHideFlags: 0
@@ -5510,6 +5494,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.035044
       objectReference: {fileID: 0}
+    - target: {fileID: 7199789260588251330, guid: b4279a1f3f519c64d95a11dc5a961a1a,
+        type: 3}
+      propertyPath: _foodIcon
+      value: 
+      objectReference: {fileID: 4438278975044516149}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4279a1f3f519c64d95a11dc5a961a1a, type: 3}
 --- !u!224 &1571698786672621247 stripped
@@ -5528,5 +5517,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca6448444d56a42459263d040e3c770d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4438278975044516149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4467522659853482275, guid: b4279a1f3f519c64d95a11dc5a961a1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 29338294920658966}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

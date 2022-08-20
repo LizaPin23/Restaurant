@@ -24,6 +24,7 @@ public class TableStateController : MonoBehaviour
     public void StartTableWork()
     {
         TableState = TableState.Empty;
+        _bubble.BubbleEmpty();
         _coroutine = WaitForPlayerTime();
         StartCoroutine(_coroutine);
     }
@@ -31,9 +32,11 @@ public class TableStateController : MonoBehaviour
     private IEnumerator WaitForPlayerTime()
     {
         yield return new WaitForSeconds(_emptyTime);
+        _bubble.BubblePrepare();
         _tableAnimator.ShowVisitor();
         TableState = TableState.Prepare;
         yield return new WaitForSeconds(_prepareTime);
+        _bubble.BubbleWaitForPlayer();
         TableState = TableState.WaitForPlayer;
         yield return new WaitForSeconds(_waitPlayerTime);
         LeaveTheTable();
