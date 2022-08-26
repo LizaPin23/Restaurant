@@ -9,6 +9,9 @@ public class TableController : MonoBehaviour
 
     void Start()
     {
-        
+        for(int i = 0; i < _tables.Length; i++)
+        {
+            _tables[i].StartWork(_menu);
+        }
     }
 }

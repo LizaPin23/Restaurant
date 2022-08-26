@@ -7,13 +7,14 @@ public class Table : MonoBehaviour
 {
     [SerializeField] private TableBubble _bubble;
     [SerializeField] private TableStateController _tableStateController;
-    [SerializeField] private Menu _menu;
 
+    private Menu _menu;
     private Food _currentOrder;
 
-    public void StartWork()
+    public void StartWork(Menu menu)
     {
         _tableStateController.StartTableWork();
+        _menu = menu;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
