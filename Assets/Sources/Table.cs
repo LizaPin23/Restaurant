@@ -56,14 +56,18 @@ public class Table : MonoBehaviour
             return;
 
         _tableStateController.StopCurrentCoroutine();
+        
         bool isFoodCorrect = player.TryServeFood(_currentOrder);
 
         if (isFoodCorrect)
         {
+            Debug.Log("Правильная еда");
             _tableStateController.StartEatingCoroutine();
         }
         else
         {
+            Debug.Log("Неправильная еда");
+
             _tableStateController.LeaveTheTable();
         }
     }

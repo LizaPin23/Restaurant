@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,12 @@ public class Money : MonoBehaviour
 
     private int _value;
 
+    public void Initialize(int startAmount)
+    {
+        _value = startAmount;
+        _view.ShowValue(_value);
+    }
+
     public void Increase(int value)
     {
         if (value < 0)
@@ -16,6 +23,7 @@ public class Money : MonoBehaviour
         }
 
         _value += value;
+        _view.ShowValue(_value);
     }
 
     public bool TryDecrease(int value)

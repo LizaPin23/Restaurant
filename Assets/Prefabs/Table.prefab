@@ -369,7 +369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bubble: {fileID: 7170558717808031956}
   _tableStateController: {fileID: 5694955490132574053}
-  _menu: {fileID: 0}
 --- !u!61 &5423231522465643723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -445,9 +444,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bubble: {fileID: 7170558717808031956}
-  _waitFoodTime: 0
+  _waitFoodTime: 10
   _prepareTime: 10
-  _waitPlayerTime: 0
+  _waitPlayerTime: 10
   _emptyTime: 5
   _eatingTime: 7
   _tableAnimator: {fileID: 497062232542294101}

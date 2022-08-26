@@ -22,9 +22,9 @@ public class Kitchen : MonoBehaviour
             return;
         }
 
-        player.GetFoodFromKitchen(new Food(_config));
+        bool success = player.TryGetFoodFromKitchen(new Food(_config));
 
-        if(_effect != null)
+        if(_effect != null && success)
             _effect.Play();
     }
 }

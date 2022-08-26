@@ -14,11 +14,3 @@ public class MoneyTextView : MonoBehaviour
     }
     
 }
-
-public class Rectangle
-{
-    public int ExampleMethod()
-    {
-        return 0;
-    }
-}

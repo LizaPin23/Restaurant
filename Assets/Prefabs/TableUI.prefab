@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d33e704982773d849867faa1bb38ce20, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -110,7 +110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3.2569885, y: -1.1670074}
+  m_AnchoredPosition: {x: -3.2569885, y: -1.1669922}
   m_SizeDelta: {x: 3.0254545, y: 2.2593307}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1560480495656466088
@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6448444d56a42459263d040e3c770d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _foodIcon: {fileID: 4467522659853482275}
   _animator: {fileID: 7870402719020144648}
   _stateIndexName: BubbleState
 --- !u!1 &1560480496848717508

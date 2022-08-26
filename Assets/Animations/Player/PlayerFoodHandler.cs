@@ -9,7 +9,7 @@ public class PlayerFoodHandler : MonoBehaviour
     public Food CurrentFood { get; private set; }
     public bool HasFood => CurrentFood != null;
 
-    public void GetFoodFromKitchen(Food food)
+    public bool TryGetFoodFromKitchen(Food food)
     {
         bool hasMoney = _money.TryDecrease(food.KitchenPrice);
 
@@ -21,12 +21,15 @@ public class PlayerFoodHandler : MonoBehaviour
         {
             Debug.Log("Не хватает денег!");
         }
+
+        return hasMoney;
     }
 
     public bool TryServeFood(Food expectedFood)
     {
         if (expectedFood.Type == CurrentFood.Type)
         {
+            Debug.Log("Должны получить деньги");
             _money.Increase(expectedFood.TablePrice);
             CurrentFood = null;
             return true;
