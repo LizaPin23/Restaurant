@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Kitchen : MonoBehaviour
 {
     [SerializeField] private FoodConfig _config;
     [SerializeField] private ParticleSystem _effect;
-    [SerializeField] private Image _foodIcon;
+    [SerializeField] private SpriteRenderer _foodIcon;
 
-    private void Start(Sprite icon)
+    private void Start()
     {
-        _foodIcon.sprite = icon;
+        _foodIcon.sprite = _config.Icon;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,6 +24,7 @@ public class Kitchen : MonoBehaviour
 
         player.GetFoodFromKitchen(new Food(_config));
 
-        _effect.Play();
+        if(_effect != null)
+            _effect.Play();
     }
 }

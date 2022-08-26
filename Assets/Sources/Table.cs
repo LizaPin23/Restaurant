@@ -11,7 +11,7 @@ public class Table : MonoBehaviour
 
     private Food _currentOrder;
 
-    private void Start()
+    public void StartWork()
     {
         _tableStateController.StartTableWork();
     }

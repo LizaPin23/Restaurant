@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a664b730ae7d340bc4cece560f0c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodType: 1
+  _config: {fileID: 0}
+  _effect: {fileID: 0}
+  _foodIcon: {fileID: 6067469431054089071}
 --- !u!61 &722905485825056522
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,7 +198,7 @@ GameObject:
   - component: {fileID: 1638484455896620206}
   - component: {fileID: 6067469431054089071}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Food Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +256,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5728154864309698128, guid: adb0ddab94aff5d4eaff86ae0cffafa5,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
