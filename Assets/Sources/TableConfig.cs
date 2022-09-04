@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TableConfig", menuName = "Create table config")]
-public class TableConfig : MonoBehaviour
+public class TableConfig : ScriptableObject
 {
     [SerializeField] private int _minEmptyTime = 1;
     [SerializeField] private int _maxEmptyTime = 3;

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d9e2aa5970ca04a8273e57c1b3746d, type: 3}
+  m_Name: TableConfig
+  m_EditorClassIdentifier: 
+  _minEmptyTime: 1
+  _maxEmptyTime: 3
+  _minPrepareTime: 4
+  _maxPrepareTime: 6
+  _minWaitForPlayerTime: 6
+  _maxWaitForPlayerTime: 10
+  _minWaitForFoodTime: 10
+  _maxWaitForFoodTime: 16
+  _minEatingTime: 3
+  _maxEatingTime: 5

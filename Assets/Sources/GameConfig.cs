@@ -6,6 +6,9 @@ using UnityEngine;
 public class GameConfig : ScriptableObject
 {
     [SerializeField] private int _startMoneyAmount = 150;
+    [SerializeField] private TableConfig _tableConfig;
 
     public int StartMoneyAmount => _startMoneyAmount;
+
+    public TableConfig TableConfig => _tableConfig;
 }
