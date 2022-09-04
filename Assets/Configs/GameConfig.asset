@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   _startMoneyAmount: 100
+  _tableConfig: {fileID: 11400000, guid: d528d3f2b2e1f5542b56be051d3110bd, type: 2}

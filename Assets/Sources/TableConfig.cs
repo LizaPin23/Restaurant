@@ -16,28 +16,25 @@ public class TableConfig : ScriptableObject
     [SerializeField] private int _minEatingTime = 3;
     [SerializeField] private int _maxEatingTime = 5;
 
-    public int GetEmptyTime()
+    public int GetTimeForState(TableState state)
     {
-        return Random.Range(_minEmptyTime, _maxEmptyTime + 1);
+        switch (state)
+        {
+            default:
+                return GetRandomTime(_minEmptyTime, _maxEmptyTime);
+            case TableState.Prepare:
+                return GetRandomTime(_minPrepareTime, _maxPrepareTime);
+            case TableState.WaitForPlayer:
+                return GetRandomTime(_minWaitForPlayerTime, _maxWaitForPlayerTime);
+            case TableState.WaitForFood:
+                return GetRandomTime(_minWaitForFoodTime, _maxWaitForFoodTime);
+            case TableState.Eating:
+                return GetRandomTime(_minEatingTime, _maxEatingTime);
+        }
     }
 
-    public int GetPrepareTime()
+    private int GetRandomTime(int min, int max)
     {
-        return Random.Range(_minPrepareTime, _maxPrepareTime + 1);
-    }
-
-    public int GetWaitPlayerTime()
-    {
-        return Random.Range(_minWaitForPlayerTime, _maxWaitForPlayerTime + 1);
-    }
-
-    public int GetWaitFoodTime()
-    {
-        return Random.Range(_minWaitForFoodTime, _maxWaitForFoodTime + 1);
-    }
-
-    public int GetEatingTime()
-    {
-        return Random.Range(_minEatingTime, _maxEatingTime + 1);
+        return Random.Range(min, max + 1);
     }
 }

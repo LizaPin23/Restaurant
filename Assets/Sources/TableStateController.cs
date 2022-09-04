@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class TableStateController : MonoBehaviour
 
     public TableState TableState { get; private set; }
 
+    public event Action<TableState> TableStateChanged;
+
     private TableConfig _tableConfig;
 
     private IEnumerator _coroutine;
@@ -18,10 +21,13 @@ public class TableStateController : MonoBehaviour
         StopCoroutine(_coroutine);
     }
 
-    public void StartTableWork(TableConfig tableConfig)
+    public void SetConfig(TableConfig tableConfig)
     {
-        TableState = TableState.Empty;
         _tableConfig = tableConfig;
+    }
+
+    public void StartTableWork()
+    {
         _bubble.BubbleEmpty();
         _coroutine = WaitForPlayerTime();
         StartCoroutine(_coroutine);
@@ -29,30 +35,27 @@ public class TableStateController : MonoBehaviour
 
     private IEnumerator WaitForPlayerTime()
     {
-        yield return new WaitForSeconds(_tableConfig.GetEmptyTime());
+        yield return WaitInState(TableState.Empty);
+
         _bubble.BubblePrepare();
         _tableAnimator.ShowVisitor();
-        TableState = TableState.Prepare;
-        yield return new WaitForSeconds(_tableConfig.GetPrepareTime());
+        yield return WaitInState(TableState.Prepare);
+
         _bubble.BubbleWaitForPlayer();
-        TableState = TableState.WaitForPlayer;
-        yield return new WaitForSeconds(_tableConfig.GetWaitPlayerTime());
+        yield return WaitInState(TableState.WaitForPlayer);
+
         LeaveTheTable();
     }
 
     private IEnumerator WaitForFoodTime()
     {
-        //оно включается с помощью метода СтартВейтФудКорутин
-        TableState = TableState.WaitForFood;
-        yield return new WaitForSeconds(_tableConfig.GetWaitFoodTime());
+        yield return WaitInState(TableState.WaitForFood);
         LeaveTheTable();
     }
 
     private IEnumerator EatingTime()
     {
-        //оно включается с помощью метода СтартИтингКорутин
-        TableState = TableState.Eating;
-        yield return new WaitForSeconds(_tableConfig.GetEatingTime());
+        yield return WaitInState(TableState.Eating);
         LeaveTheTable();
     }
 
@@ -75,5 +78,12 @@ public class TableStateController : MonoBehaviour
         StartCoroutine(_coroutine);
     }
 
+    private IEnumerator WaitInState(TableState state)
+    {
+        TableState = state;
+        TableStateChanged?.Invoke(state);
+        int time = _tableConfig.GetTimeForState(state);
+        yield return new WaitForSeconds(time);
+    }
 
 }

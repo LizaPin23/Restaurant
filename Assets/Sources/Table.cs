@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Table : MonoBehaviour
 {
@@ -11,9 +8,25 @@ public class Table : MonoBehaviour
     private Menu _menu;
     private Food _currentOrder;
 
+    private void Awake()
+    {
+        _tableStateController.TableStateChanged += OnTableStateChanged;
+    }
+
+    private void OnTableStateChanged(TableState state)
+    {
+        Debug.Log(gameObject.name + " " + state);
+
+        if (state == TableState.Empty)
+        {
+            _tableStateController.StartTableWork();
+        }
+    }
+
     public void StartWork(Menu menu, TableConfig tableConfig)
     {
-        _tableStateController.StartTableWork(tableConfig);
+        _tableStateController.SetConfig(tableConfig);
+        _tableStateController.StartTableWork();
         _menu = menu;
     }
 
@@ -23,8 +36,6 @@ public class Table : MonoBehaviour
 
         if (player == null)
             return;
-
-        Debug.Log(_tableStateController.TableState);
 
         switch (_tableStateController.TableState)
         {
