@@ -16,14 +16,28 @@ public class TableConfig : MonoBehaviour
     [SerializeField] private int _minEatingTime = 3;
     [SerializeField] private int _maxEatingTime = 5;
 
-    public int MinEmptyTime => _minEmptyTime;
-    public int MaxEmptyTime => _maxEmptyTime;
-    public int MinPrepareTime => _minPrepareTime;
-    public int MaxPrepareTime => _maxPrepareTime;
-    public int MinWaitForPlayerTime => _minWaitForPlayerTime;
-    public int MaxWaitForPlayerTime => _maxWaitForPlayerTime;
-    public int MinWaitForFoodTime => _minWaitForFoodTime;
-    public int MaxWaitForFoodTime => _maxWaitForFoodTime;
-    public int MinEatingTime => _minEatingTime;
-    public int MaxEatingTime => _maxEatingTime;
+    public int GetEmptyTime()
+    {
+        return Random.Range(_minEmptyTime, _maxEmptyTime + 1);
+    }
+
+    public int GetPrepareTime()
+    {
+        return Random.Range(_minPrepareTime, _maxPrepareTime + 1);
+    }
+
+    public int GetWaitPlayerTime()
+    {
+        return Random.Range(_minWaitForPlayerTime, _maxWaitForPlayerTime + 1);
+    }
+
+    public int GetWaitFoodTime()
+    {
+        return Random.Range(_minWaitForFoodTime, _maxWaitForFoodTime + 1);
+    }
+
+    public int GetEatingTime()
+    {
+        return Random.Range(_minEatingTime, _maxEatingTime + 1);
+    }
 }

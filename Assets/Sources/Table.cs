@@ -7,7 +7,6 @@ public class Table : MonoBehaviour
 {
     [SerializeField] private TableBubble _bubble;
     [SerializeField] private TableStateController _tableStateController;
-    [SerializeField] private 
 
     private Menu _menu;
     private Food _currentOrder;
