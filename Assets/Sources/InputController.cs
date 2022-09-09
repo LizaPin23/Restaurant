@@ -6,10 +6,15 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public event Action<Vector3> ImputMovement;
+    public event Action ButtonEscapePressed; 
 
     private void Update()
     {
         GetMovementVector();
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ButtonEscapePressed?.Invoke();
+        }
     }
 
     private void GetMovementVector()
