@@ -7597,6 +7597,8 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 0fe72e5dab9159f4196e0eefa46c1bb1, type: 2}
   _money: {fileID: 940073452}
   _tableController: {fileID: 246510573}
+  _inputController: {fileID: 2091963137}
+  _movementPlayer: {fileID: 1075954753}
 --- !u!4 &2091963136
 Transform:
   m_ObjectHideFlags: 0

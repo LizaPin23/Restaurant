@@ -1,16 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-    [SerializeField] private PlayerAnimation _animator;
-    private PlayerMovement _movement { get; private set;}
+    public event Action<Vector3> ImputMovement;
 
-    public event Action<Vector3 movement> ImputMovement;
+    private void Update()
+    {
+        GetMovementVector();
+    }
 
-    public void ImputControllerMovement(PlayerMovement _movement)
+    private void GetMovementVector()
     {
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
