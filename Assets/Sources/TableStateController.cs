@@ -1,89 +1,67 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class TableStateController : MonoBehaviour
+public class TableStateController
 {
-    [SerializeField] private TableBubble _bubble;
-    [SerializeField] private TableAnimator _tableAnimator;
-
-    public TableState TableState { get; private set; }
-
-    public event Action<TableState> TableStateChanged;
+    public event Action<TableState> StateChanged;
+    
+    private readonly List<TableState> _stateChain = new List<TableState>(
+        new [] {TableState.Empty, TableState.VisitorComing, TableState.Prepare, TableState.WaitForPlayer,
+        TableState.WaitForFood, TableState.Eating, TableState.VisitorLeaving});
 
     private TableConfig _tableConfig;
+    private Timer _timer;
+    private int _currentStateIndex;
 
-    private IEnumerator _coroutine;
-
-    public void StopCurrentCoroutine()
-    {
-        StopCoroutine(_coroutine);
-    }
-
-    public void SetConfig(TableConfig tableConfig)
+    public TableStateController(TableConfig tableConfig, Timer timer)
     {
         _tableConfig = tableConfig;
+        _timer = timer;
+        _timer.TimeIsOff += OnTimeIsOff;
     }
 
-    public void StartTableWork()
+    public void StartChain()
     {
-        _bubble.BubbleEmpty();
-        _coroutine = WaitForPlayerTime();
-        StartCoroutine(_coroutine);
+        _currentStateIndex = 0;
+        SetStateAndWait(_stateChain[_currentStateIndex]);
     }
 
-    private IEnumerator WaitForPlayerTime()
+    public void ForceState(TableState state)
     {
-        yield return WaitInState(TableState.Empty);
-
-        _bubble.BubblePrepare();
-        _tableAnimator.ShowVisitor();
-        yield return WaitInState(TableState.Prepare);
-
-        _bubble.BubbleWaitForPlayer();
-        yield return WaitInState(TableState.WaitForPlayer);
-
-        LeaveTheTable();
+        _currentStateIndex = _stateChain.IndexOf(state);
+        _timer.Stop();
+        TableState nextState = _stateChain[_currentStateIndex];
+        SetStateAndWait(nextState);
     }
 
-    private IEnumerator WaitForFoodTime()
+    private void OnTimeIsOff()
     {
-        yield return WaitInState(TableState.WaitForFood);
-        LeaveTheTable();
+        TableState currentState = _stateChain[_currentStateIndex];
+
+        if (currentState == TableState.WaitForFood || currentState == TableState.WaitForPlayer)
+        {
+            ForceState(TableState.VisitorLeaving);
+            return;
+        }
+
+        TableState nextState = GetNextState();
+        SetStateAndWait(nextState);
     }
 
-    private IEnumerator EatingTime()
+    private void SetStateAndWait(TableState state)
     {
-        yield return WaitInState(TableState.Eating);
-        LeaveTheTable();
+        StateChanged?.Invoke(state);
+        var time = _tableConfig.GetTimeForState(state);
+        _timer.Run(time);
     }
 
-    public void LeaveTheTable()
+    private TableState GetNextState()
     {
-        StopAllCoroutines();
-        TableState = TableState.Empty;
-        _tableAnimator.HideVisitor();
-    }
+        _currentStateIndex++;
 
-    public void StartWaitFoodCoroutine()
-    {
-        _coroutine = WaitForFoodTime();
-        StartCoroutine(_coroutine);
-    }
+        if (_currentStateIndex >= _stateChain.Count)
+            _currentStateIndex = 0;
 
-    public void StartEatingCoroutine()
-    {
-        _coroutine = EatingTime();
-        StartCoroutine(_coroutine);
+        return _stateChain[_currentStateIndex];
     }
-
-    private IEnumerator WaitInState(TableState state)
-    {
-        TableState = state;
-        TableStateChanged?.Invoke(state);
-        int time = _tableConfig.GetTimeForState(state);
-        yield return new WaitForSeconds(time);
-    }
-
 }

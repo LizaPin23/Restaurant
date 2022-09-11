@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         _money.Initialize(_config.StartMoneyAmount);
-        //_tableController.RunTables(_config.TableConfig);
+        _tableController.RunTables(_config.TableConfig);
     }
 
     private void OnEscapePressed()

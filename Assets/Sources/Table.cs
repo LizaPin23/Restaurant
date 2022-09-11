@@ -3,31 +3,38 @@
 public class Table : MonoBehaviour
 {
     [SerializeField] private TableBubble _bubble;
-    [SerializeField] private TableStateController _tableStateController;
+    [SerializeField] private TableAnimator _animator;
 
+    [SerializeField] private Timer _timer;
+
+    private TableStateController _tableStateController;
     private Menu _menu;
     private Food _currentOrder;
+    private TableState _currentState;
 
-    private void Awake()
+    public void StartWork(Menu menu, TableConfig tableConfig)
     {
-        _tableStateController.TableStateChanged += OnTableStateChanged;
+        _menu = menu;
+
+        _tableStateController = new TableStateController(tableConfig, _timer);
+        _tableStateController.StateChanged += OnTableStateChanged;
+        _tableStateController.StartChain();
     }
 
     private void OnTableStateChanged(TableState state)
     {
-        Debug.Log(gameObject.name + " " + state);
+        _bubble.SetTableState(state);
+        _currentState = state;
 
-        if (state == TableState.Empty)
+        switch (state)
         {
-            _tableStateController.StartTableWork();
+            case TableState.VisitorComing:
+                _animator.ShowVisitor();
+                break;
+            case TableState.VisitorLeaving:
+                _animator.HideVisitor();
+                break;
         }
-    }
-
-    public void StartWork(Menu menu, TableConfig tableConfig)
-    {
-        _tableStateController.SetConfig(tableConfig);
-        _tableStateController.StartTableWork();
-        _menu = menu;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -37,49 +44,43 @@ public class Table : MonoBehaviour
         if (player == null)
             return;
 
-        switch (_tableStateController.TableState)
+        switch (_currentState)
         {
             default:
                 return;
             case TableState.WaitForPlayer:
-                OnWaitForPlayer();
+                CreateOrder();
                 break;
             case TableState.WaitForFood:
-                OnWaitForFood(player);
+                ServeFoodFrom(player);
                 break;
-
         }
     }
 
-    private void OnWaitForPlayer()
+    private void CreateOrder()
     {
-        _tableStateController.StopCurrentCoroutine();
-
         _currentOrder = _menu.GetRandomFood();
-
-        _tableStateController.StartWaitFoodCoroutine();
-        _bubble.BubbleWaitForFood(_currentOrder.Icon);
+        _bubble.SetFoodIcon(_currentOrder.Icon);
+        _tableStateController.ForceState(TableState.WaitForFood);
     }
 
-    private void OnWaitForFood(PlayerFoodHandler player)
+    private void ServeFoodFrom(PlayerFoodHandler player)
     {
         if (player.HasFood == false)
             return;
 
-        _tableStateController.StopCurrentCoroutine();
-        
         bool isFoodCorrect = player.TryServeFood(_currentOrder);
 
         if (isFoodCorrect)
         {
             Debug.Log("Правильная еда");
-            _tableStateController.StartEatingCoroutine();
+            _tableStateController.ForceState(TableState.Eating);
         }
         else
         {
             Debug.Log("Неправильная еда");
 
-            _tableStateController.LeaveTheTable();
+            _tableStateController.ForceState(TableState.VisitorLeaving);
         }
     }
 }

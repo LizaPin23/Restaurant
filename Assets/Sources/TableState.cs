@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum TableState
+﻿public enum TableState
 {
    WaitForPlayer,
    WaitForFood,
    Prepare,
    Eating,
-   Empty
+   Empty,
+   VisitorComing,
+   VisitorLeaving
 }

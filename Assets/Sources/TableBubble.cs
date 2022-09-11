@@ -1,36 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TableBubble : MonoBehaviour
 {
-    [SerializeField] private Image _foodIcon;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private string _stateIndexName = "BubbleState";
-    public void BubbleEmpty()
+    [SerializeField] private Image _foodImage;
+    [SerializeField] private Image _stateImage;
+    [SerializeField] private Animator _visibleAnimator;
+    [SerializeField] private string _animatorBoolName = "Visible";
+
+    [Header("Icons")] 
+    [SerializeField] private Sprite _prepareIcon;
+    [SerializeField] private Sprite _waitForPlayerIcon;
+    [SerializeField] private Sprite _waitForFoodIcon;
+    [SerializeField] private Sprite _eatingIcon;
+
+    public void SetFoodIcon(Sprite icon)
     {
-        _animator.SetInteger(_stateIndexName, 0);
+        _foodImage.sprite = icon;
     }
 
-    public void BubblePrepare()
+    public void SetTableState(TableState state)
     {
-        _animator.SetInteger(_stateIndexName, 1);
-    }
-
-    public void BubbleWaitForPlayer()
-    {
-        _animator.SetInteger(_stateIndexName, 2);
-    }
-
-    public void BubbleWaitForFood(Sprite icon)
-    {
-        _animator.SetInteger(_stateIndexName, 3);
-        _foodIcon.sprite = icon;
-    }
-
-    public void BubbleEating()
-    {
-        _animator.SetInteger(_stateIndexName, 4);
+        switch (state)
+        {
+            case TableState.VisitorLeaving:
+                _visibleAnimator.SetBool(_animatorBoolName, false);
+                return;
+            case TableState.VisitorComing:
+                _stateImage.sprite = _prepareIcon;
+                _foodImage.sprite = null;
+                _visibleAnimator.SetBool(_animatorBoolName, true);
+                return;
+            case TableState.Prepare:
+                _stateImage.sprite = _prepareIcon;
+                return;
+            case TableState.WaitForPlayer:
+                _stateImage.sprite = _waitForPlayerIcon;
+                return;
+            case TableState.WaitForFood:
+                _stateImage.sprite = _waitForFoodIcon;
+                return;
+            case TableState.Eating:
+                _stateImage.sprite = _eatingIcon;
+                return;
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "TableConfig", menuName = "Create table config")]
 public class TableConfig : ScriptableObject
@@ -16,6 +14,10 @@ public class TableConfig : ScriptableObject
     [SerializeField] private int _minEatingTime = 3;
     [SerializeField] private int _maxEatingTime = 5;
 
+    [Header("Animation durations")] 
+    [SerializeField] private int _visitorComingDuration = 2;
+    [SerializeField] private int _visitorLeavingDuration = 2;
+
     public int GetTimeForState(TableState state)
     {
         switch (state)
@@ -30,6 +32,10 @@ public class TableConfig : ScriptableObject
                 return GetRandomTime(_minWaitForFoodTime, _maxWaitForFoodTime);
             case TableState.Eating:
                 return GetRandomTime(_minEatingTime, _maxEatingTime);
+            case TableState.VisitorComing:
+                return _visitorComingDuration;
+            case TableState.VisitorLeaving:
+                return _visitorLeavingDuration;
         }
     }
 
