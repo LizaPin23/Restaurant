@@ -23,7 +23,7 @@ public class TableStateController
     public void StartChain()
     {
         _currentStateIndex = 0;
-        SetStateAndWait(_stateChain[_currentStateIndex]);
+        SetState(_stateChain[_currentStateIndex], true);
     }
 
     public void ForceState(TableState state)
@@ -31,7 +31,7 @@ public class TableStateController
         _currentStateIndex = _stateChain.IndexOf(state);
         _timer.Stop();
         TableState nextState = _stateChain[_currentStateIndex];
-        SetStateAndWait(nextState);
+        SetState(nextState, true);
     }
 
     private void OnTimeIsOff()
@@ -45,14 +45,19 @@ public class TableStateController
         }
 
         TableState nextState = GetNextState();
-        SetStateAndWait(nextState);
+        bool startTimer = nextState != TableState.Empty;
+        SetState(nextState, startTimer);
     }
 
-    private void SetStateAndWait(TableState state)
+    private void SetState(TableState state, bool startTimer)
     {
         StateChanged?.Invoke(state);
-        var time = _tableConfig.GetTimeForState(state);
-        _timer.Run(time);
+
+        if (startTimer)
+        {
+            var time = _tableConfig.GetTimeForState(state);
+            _timer.Run(time);
+        }
     }
 
     private TableState GetNextState()

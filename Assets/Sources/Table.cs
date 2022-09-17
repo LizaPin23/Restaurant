@@ -1,29 +1,40 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Table : MonoBehaviour
 {
     [SerializeField] private TableBubble _bubble;
     [SerializeField] private TableAnimator _animator;
-
     [SerializeField] private Timer _timer;
+
+    public event Action<Table> IsDone; 
 
     private TableStateController _tableStateController;
     private Menu _menu;
     private Food _currentOrder;
     private TableState _currentState;
 
-    public void StartWork(Menu menu, TableConfig tableConfig)
+    public void Initialize(Menu menu, TableConfig tableConfig)
     {
         _menu = menu;
-
         _tableStateController = new TableStateController(tableConfig, _timer);
         _tableStateController.StateChanged += OnTableStateChanged;
+    }
+
+    public void StartWork()
+    {
         _tableStateController.StartChain();
     }
 
     private void OnTableStateChanged(TableState state)
     {
         _bubble.SetTableState(state);
+
+        if (state == TableState.Empty && _currentState == TableState.VisitorLeaving)
+        {
+            IsDone?.Invoke(this);
+        }
+
         _currentState = state;
 
         switch (state)
