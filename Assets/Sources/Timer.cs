@@ -24,5 +24,6 @@ public class Timer : MonoBehaviour
         }
 
         TimeIsOff?.Invoke();
+
     }
 }

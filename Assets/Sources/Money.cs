@@ -28,8 +28,21 @@ public class Money : MonoBehaviour
 
     public bool TryDecrease(int value)
     {
+        //тут надо
         if (value < 0) return false;
         if (_value < value) return false;
+
+        _value -= value;
+        _view.ShowValue(_value);
+        return true;
+    }
+
+    public bool Decrease(int value)
+    {
+        if (value < 0)
+        {
+            return false;
+        }
 
         _value -= value;
         _view.ShowValue(_value);
