@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TableController : MonoBehaviour
@@ -8,7 +9,14 @@ public class TableController : MonoBehaviour
     [SerializeField] private Menu _menu;
     [SerializeField] private int _activeTables = 2;
 
+    public event Action VisitorLeft;
+
     private List<Table> _emptyTables;
+
+    private void OnVisitorLeft()
+    {
+        VisitorLeft?.Invoke();
+    }
 
     public void RunTables(TableConfig tableConfig)
     {
@@ -19,6 +27,7 @@ public class TableController : MonoBehaviour
             Table table = _tables[i];
             table.Initialize(_menu, tableConfig);
             table.IsDone += OnTableIsDone;
+            table.VisitorLeft += OnVisitorLeft;
         }
 
         for (int i = 0; i < _activeTables; i++)
@@ -29,7 +38,7 @@ public class TableController : MonoBehaviour
 
     private void RunRandomTable()
     {
-        int index = Random.Range(0, _emptyTables.Count);
+        int index = UnityEngine.Random.Range(0, _emptyTables.Count);
         Table table = _emptyTables[index];
         _emptyTables.RemoveAt(index);
         table.StartWork();

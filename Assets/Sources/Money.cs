@@ -7,6 +7,8 @@ public class Money : MonoBehaviour
 {
     [SerializeField] private MoneyTextView _view;
 
+    public event Action GameOver;
+
     private int _value;
     private int _visitorDecrease;
 
@@ -40,6 +42,10 @@ public class Money : MonoBehaviour
 
     public void VisitorDecrease()
     {
-
+        bool enoughMoney = TryDecrease(_visitorDecrease);
+        if(enoughMoney == false)
+        {
+            GameOver?.Invoke();
+        }
     }
 }

@@ -7,7 +7,8 @@ public class Table : MonoBehaviour
     [SerializeField] private TableAnimator _animator;
     [SerializeField] private Timer _timer;
 
-    public event Action<Table> IsDone; 
+    public event Action<Table> IsDone;
+    public event Action VisitorLeft;
 
     private TableStateController _tableStateController;
     private Menu _menu;
@@ -93,6 +94,7 @@ public class Table : MonoBehaviour
             Debug.Log("Неправильная еда");
 
             _tableStateController.ForceState(TableState.VisitorLeaving);
+            VisitorLeft?.Invoke();
         }
     }
 }

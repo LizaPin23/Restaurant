@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         _inputController.ImputMovement += _movementPlayer.Move;
+        _tableController.VisitorLeft += _money.VisitorDecrease;
+        _money.GameOver += OnGameOver;
         _inputController.ButtonEscapePressed += OnEscapePressed;
     }
 
@@ -41,5 +43,10 @@ public class GameController : MonoBehaviour
        }
 
         OnPauseChanged?.Invoke(_pause);
+    }
+
+    private void OnGameOver()
+    {
+        Debug.Log("Game over");
     }
 }
