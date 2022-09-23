@@ -6,14 +6,15 @@ public class Table : MonoBehaviour
     [SerializeField] private TableBubble _bubble;
     [SerializeField] private TableAnimator _animator;
     [SerializeField] private Timer _timer;
+    [SerializeField] private ParticleSystem _moneyEffect;
 
-    public event Action<Table> IsDone;
-    public event Action VisitorLeft;
+    public event Action<Table, bool> IsDone;
 
     private TableStateController _tableStateController;
     private Menu _menu;
     private Food _currentOrder;
     private TableState _currentState;
+    private bool _correctFood;
 
     public void Initialize(Menu menu, TableConfig tableConfig)
     {
@@ -24,6 +25,7 @@ public class Table : MonoBehaviour
 
     public void StartWork()
     {
+        _correctFood = false;
         _tableStateController.StartChain();
     }
 
@@ -33,8 +35,7 @@ public class Table : MonoBehaviour
 
         if (state == TableState.Empty && _currentState == TableState.VisitorLeaving)
         {
-            IsDone?.Invoke(this);
-
+            IsDone?.Invoke(this, _correctFood);
         }
 
         _currentState = state;
@@ -82,19 +83,16 @@ public class Table : MonoBehaviour
         if (player.HasFood == false)
             return;
 
-        bool isFoodCorrect = player.TryServeFood(_currentOrder);
+        _correctFood = player.TryServeFood(_currentOrder);
 
-        if (isFoodCorrect)
+        if (_correctFood)
         {
-            Debug.Log("Правильная еда");
+            _moneyEffect.Play();
             _tableStateController.ForceState(TableState.Eating);
         }
         else
         {
-            Debug.Log("Неправильная еда");
-
             _tableStateController.ForceState(TableState.VisitorLeaving);
-            VisitorLeft?.Invoke();
         }
     }
 }

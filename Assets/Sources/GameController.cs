@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         _inputController.ImputMovement += _movementPlayer.Move;
-        _tableController.VisitorLeft += _money.VisitorDecrease;
+        _tableController.VisitorFailed += _money.VisitorDecrease;
         _money.GameOver += OnGameOver;
         _inputController.ButtonEscapePressed += OnEscapePressed;
     }

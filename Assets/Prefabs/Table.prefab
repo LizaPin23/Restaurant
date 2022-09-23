@@ -370,6 +370,7 @@ MonoBehaviour:
   _bubble: {fileID: 6670671704748917282}
   _animator: {fileID: 497062232542294101}
   _timer: {fileID: 5694955490132574053}
+  _moneyEffect: {fileID: 5618850244857311884}
 --- !u!61 &5423231522465643723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -470,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7766480914433809118}
   m_LocalRotation: {x: -0.5019614, y: 0.49803087, z: -0.49803096, w: 0.5019614}
-  m_LocalPosition: {x: 2.5355225, y: -4.4346204, z: 0}
+  m_LocalPosition: {x: -0.013, y: 0.06, z: -0}
   m_LocalScale: {x: 0.67803776, y: 0.77978796, z: 0.35265616}
   m_Children: []
   m_Father: {fileID: 4487034066763401969}
