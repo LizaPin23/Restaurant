@@ -11,7 +11,7 @@ public class PlayerFoodHandler : MonoBehaviour
 
     public bool TryGetFoodFromKitchen(Food food)
     {
-        bool hasMoney = _money.Decrease(food.KitchenPrice);
+        bool hasMoney = _money.TryDecrease(food.KitchenPrice);
 
         if (hasMoney)
         {
@@ -38,10 +38,4 @@ public class PlayerFoodHandler : MonoBehaviour
         CurrentFood = null;
         return false;
     }
-
-    public bool UnHappyVisitor(TableStateController visitorRunning)
-    {
-        if ()
-    }
-
 }

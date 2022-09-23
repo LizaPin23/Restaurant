@@ -8,11 +8,13 @@ public class Money : MonoBehaviour
     [SerializeField] private MoneyTextView _view;
 
     private int _value;
+    private int _visitorDecrease;
 
-    public void Initialize(int startAmount)
+    public void Initialize(int startAmount, int visitorDecrease)
     {
         _value = startAmount;
         _view.ShowValue(_value);
+        _visitorDecrease = visitorDecrease;
     }
 
     public void Increase(int value)
@@ -28,7 +30,6 @@ public class Money : MonoBehaviour
 
     public bool TryDecrease(int value)
     {
-        //тут надо
         if (value < 0) return false;
         if (_value < value) return false;
 
@@ -37,15 +38,8 @@ public class Money : MonoBehaviour
         return true;
     }
 
-    public bool Decrease(int value)
+    public void VisitorDecrease()
     {
-        if (value < 0)
-        {
-            return false;
-        }
 
-        _value -= value;
-        _view.ShowValue(_value);
-        return true;
     }
 }

@@ -93,7 +93,6 @@ public class Table : MonoBehaviour
             Debug.Log("Неправильная еда");
 
             _tableStateController.ForceState(TableState.VisitorLeaving);
-            Money.TryDecrease();
         }
     }
 }

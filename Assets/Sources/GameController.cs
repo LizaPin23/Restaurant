@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        _money.Initialize(_config.StartMoneyAmount);
+        _money.Initialize(_config.StartMoneyAmount, _config.MoneyDecreaseAmount);
         _tableController.RunTables(_config.TableConfig);
     }
 
