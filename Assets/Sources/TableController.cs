@@ -30,6 +30,15 @@ public class TableController : MonoBehaviour
         }
     }
 
+    public void ClearTables()
+    {
+        for (int i = 0; i < _tables.Length; i++)
+        {
+            Table table = _tables[i];
+            table.Clear();
+        }
+    }
+
     private void RunRandomTable()
     {
         if (_emptyTables.Count == 0)

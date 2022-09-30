@@ -32,8 +32,17 @@ public class Money : MonoBehaviour
 
     public bool TryDecrease(int value)
     {
-        if (value < 0) return false;
-        if (_value < value) return false;
+        if (value < 0)
+        {
+            Debug.LogError("Wrong value");
+            return false;
+        }
+
+        if (_value < value)
+        {
+            GameOver?.Invoke();
+            return false;
+        }
 
         _value -= value;
         _view.ShowValue(_value);
@@ -42,10 +51,6 @@ public class Money : MonoBehaviour
 
     public void VisitorDecrease()
     {
-        bool enoughMoney = TryDecrease(_visitorDecrease);
-        if(enoughMoney == false)
-        {
-            GameOver?.Invoke();
-        }
+        TryDecrease(_visitorDecrease);
     }
 }

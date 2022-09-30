@@ -29,6 +29,12 @@ public class Table : MonoBehaviour
         _tableStateController.StartChain();
     }
 
+    public void Clear()
+    {
+        _currentState = TableState.Empty;
+        _tableStateController.StopChain();
+    }
+
     private void OnTableStateChanged(TableState state)
     {
         _bubble.SetTableState(state);

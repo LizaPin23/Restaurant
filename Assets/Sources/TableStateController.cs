@@ -26,6 +26,13 @@ public class TableStateController
         SetState(_stateChain[_currentStateIndex], true);
     }
 
+    public void StopChain()
+    {
+        _currentStateIndex = 0;
+        _timer.Stop();
+        SetState(_stateChain[_currentStateIndex], false);
+    }
+
     public void ForceState(TableState state)
     {
         _currentStateIndex = _stateChain.IndexOf(state);

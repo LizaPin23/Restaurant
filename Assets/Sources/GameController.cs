@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private InputController _inputController;
     [SerializeField] private PlayerMovement _movementPlayer;
 
+    [Header("Menus")] 
+    [SerializeField] private GameOverMenu _gameOverMenu;
+
     public event Action<bool> OnPauseChanged;
 
     private bool _pause;
@@ -21,32 +24,58 @@ public class GameController : MonoBehaviour
         _tableController.VisitorFailed += _money.VisitorDecrease;
         _money.GameOver += OnGameOver;
         _inputController.ButtonEscapePressed += OnEscapePressed;
+        _gameOverMenu.QuitButtonPressed += OnQuitButtonPressed;
+        _gameOverMenu.RetryButtonPressed += OnRetryButtonPressed;
     }
 
     private void Start()
     {
-        _money.Initialize(_config.StartMoneyAmount, _config.MoneyDecreaseAmount);
-        _tableController.RunTables(_config.TableConfig);
+        StartGame();
     }
 
     private void OnEscapePressed()
     {
-        _pause = !_pause;
+        SetPaused(!_pause);
+    }
 
-       if(_pause)
-       {
+    private void SetPaused(bool value)
+    {
+        _pause = value;
+
+        if (_pause)
+        {
             Time.timeScale = 0;
-       }
-       else
-       {
+        }
+        else
+        {
             Time.timeScale = 1;
-       }
+        }
 
         OnPauseChanged?.Invoke(_pause);
     }
 
     private void OnGameOver()
     {
-        Debug.Log("Game over");
+        SetPaused(true);
+        _gameOverMenu.Show();
+    }
+
+    private void OnQuitButtonPressed()
+    {
+        Application.Quit();
+    }
+
+    private void OnRetryButtonPressed()
+    {
+        _gameOverMenu.Hide();
+        SetPaused(false);
+        _tableController.ClearTables();
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        _money.Initialize(_config.StartMoneyAmount, _config.MoneyDecreaseAmount);
+        _tableController.RunTables(_config.TableConfig);
     }
 }
