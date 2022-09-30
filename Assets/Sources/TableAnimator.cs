@@ -8,8 +8,8 @@ public class TableAnimator : MonoBehaviour
 
     [SerializeField] private string _boolName = "VisitorBool";
     [SerializeField] private string _boolNameThree = "VisitorBoolThree";
-    [SerializeField] private string _boolNameTwo = "TwoBool";
-    [SerializeField] private string _boolNameFour = "FourBool";
+    [SerializeField] private string _boolNameTwo = "VisitorBoolTwo";
+    [SerializeField] private string _boolNameFour = "VisitorBoolFour";
 
     public void ShowVisitor()
     {
