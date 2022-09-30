@@ -5,30 +5,15 @@ using UnityEngine;
 public class TableAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _tableAnimator;
-
-    [SerializeField] private string _boolName = "VisitorBool";
-    [SerializeField] private string _boolNameThree = "VisitorBoolThree";
-    [SerializeField] private string _boolNameTwo = "VisitorBoolTwo";
-    [SerializeField] private string _boolNameFour = "VisitorBoolFour";
+    [SerializeField] private string _visibleParam = "Visible";
 
     public void ShowVisitor()
     {
-        _tableAnimator.SetBool(_boolName, true);
-        _tableAnimator.SetBool(_boolNameThree, true);
-        _tableAnimator.SetBool(_boolNameTwo, true);
-        _tableAnimator.SetBool(_boolNameFour, true);
+        _tableAnimator.SetBool(_visibleParam, true);
     }
 
     public void HideVisitor()
     {
-        _tableAnimator.SetBool(_boolName, false);
-        _tableAnimator.SetBool(_boolNameThree, false);
-        _tableAnimator.SetBool(_boolNameTwo, false);
-        _tableAnimator.SetBool(_boolNameFour, false);
-    }
-
-    public void SitVisitor()
-    {
-
+        _tableAnimator.SetBool(_visibleParam, false);
     }
 }
