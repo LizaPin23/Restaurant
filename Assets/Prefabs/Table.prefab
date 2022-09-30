@@ -410,10 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tableAnimator: {fileID: 2694365865670526996}
-  _boolName: VisitorBool
-  _boolNameThree: VisitorBoolThree
-  _boolNameTwo: TwoBool
-  _boolNameFour: FourBool
+  _visibleParam: Visible
+  _emptyTrigger: Empty
 --- !u!95 &2694365865670526996
 Animator:
   serializedVersion: 3
@@ -5427,6 +5425,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TableUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029819495577332991, guid: b4279a1f3f519c64d95a11dc5a961a1a,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4279a1f3f519c64d95a11dc5a961a1a, type: 3}

@@ -11,12 +11,18 @@ public class Money : MonoBehaviour
 
     private int _value;
     private int _visitorDecrease;
+    private int _startAmount;
 
     public void Initialize(int startAmount, int visitorDecrease)
     {
-        _value = startAmount;
-        _view.ShowValue(_value);
+        _startAmount = startAmount;
         _visitorDecrease = visitorDecrease;
+    }
+
+    public void StartWork()
+    {
+        _value = _startAmount;
+        _view.ShowValue(_value);
     }
 
     public void Increase(int value)

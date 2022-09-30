@@ -20,6 +20,9 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        _money.Initialize(_config.StartMoneyAmount, _config.MoneyDecreaseAmount);
+        _tableController.Initialize(_config.TableConfig);
+
         _inputController.ImputMovement += _movementPlayer.Move;
         _tableController.VisitorFailed += _money.VisitorDecrease;
         _money.GameOver += OnGameOver;
@@ -69,13 +72,12 @@ public class GameController : MonoBehaviour
     {
         _gameOverMenu.Hide();
         SetPaused(false);
-        _tableController.ClearTables();
         StartGame();
     }
 
     private void StartGame()
     {
-        _money.Initialize(_config.StartMoneyAmount, _config.MoneyDecreaseAmount);
-        _tableController.RunTables(_config.TableConfig);
+        _tableController.RunTables();
+        _money.StartWork();
     }
 }

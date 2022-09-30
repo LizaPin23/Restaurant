@@ -6,6 +6,7 @@ public class TableAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _tableAnimator;
     [SerializeField] private string _visibleParam = "Visible";
+    [SerializeField] private string _emptyTrigger = "Empty";
 
     public void ShowVisitor()
     {
@@ -15,5 +16,10 @@ public class TableAnimator : MonoBehaviour
     public void HideVisitor()
     {
         _tableAnimator.SetBool(_visibleParam, false);
+    }
+
+    public void SetEmpty()
+    {
+        _tableAnimator.SetTrigger(_emptyTrigger);
     }
 }

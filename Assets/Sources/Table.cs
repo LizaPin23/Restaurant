@@ -20,11 +20,12 @@ public class Table : MonoBehaviour
     {
         _menu = menu;
         _tableStateController = new TableStateController(tableConfig, _timer);
-        _tableStateController.StateChanged += OnTableStateChanged;
+        
     }
 
     public void StartWork()
     {
+        _tableStateController.StateChanged += OnTableStateChanged;
         _correctFood = false;
         _tableStateController.StartChain();
     }
@@ -32,6 +33,9 @@ public class Table : MonoBehaviour
     public void Clear()
     {
         _currentState = TableState.Empty;
+        _animator.SetEmpty();
+        _bubble.SetEmpty();
+        _tableStateController.StateChanged -= OnTableStateChanged;
         _tableStateController.StopChain();
     }
 

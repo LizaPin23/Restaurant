@@ -13,16 +13,20 @@ public class TableController : MonoBehaviour
 
     private List<Table> _emptyTables;
 
-    public void RunTables(TableConfig tableConfig)
+    public void Initialize(TableConfig tableConfig)
     {
-        _emptyTables = new List<Table>(_tables);
-
-        for(int i = 0; i < _tables.Length; i++)
+        for (int i = 0; i < _tables.Length; i++)
         {
             Table table = _tables[i];
             table.Initialize(_menu, tableConfig);
             table.IsDone += OnTableIsDone;
         }
+    }
+
+    public void RunTables()
+    {
+        ClearTables();
+        _emptyTables = new List<Table>(_tables);
 
         for (int i = 0; i < _activeTables; i++)
         {
@@ -30,7 +34,7 @@ public class TableController : MonoBehaviour
         }
     }
 
-    public void ClearTables()
+    private void ClearTables()
     {
         for (int i = 0; i < _tables.Length; i++)
         {

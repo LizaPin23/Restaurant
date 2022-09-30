@@ -7,6 +7,7 @@ public class TableBubble : MonoBehaviour
     [SerializeField] private Image _stateImage;
     [SerializeField] private Animator _visibleAnimator;
     [SerializeField] private string _animatorBoolName = "Visible";
+    [SerializeField] private string _emptyTrigger = "Empty";
 
     [Header("Icons")] 
     [SerializeField] private Sprite _prepareIcon;
@@ -44,5 +45,10 @@ public class TableBubble : MonoBehaviour
                 _stateImage.sprite = _eatingIcon;
                 return;
         }
+    }
+
+    public void SetEmpty()
+    {
+        _visibleAnimator.SetTrigger(_emptyTrigger);
     }
 }
