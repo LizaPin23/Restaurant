@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
 
     [Header("Menus")] 
     [SerializeField] private GameOverMenu _gameOverMenu;
+    [SerializeField] private PauseMenu _pauseMenu;
 
     public event Action<bool> OnPauseChanged;
 
@@ -29,6 +30,9 @@ public class GameController : MonoBehaviour
         _inputController.ButtonEscapePressed += OnEscapePressed;
         _gameOverMenu.QuitButtonPressed += OnQuitButtonPressed;
         _gameOverMenu.RetryButtonPressed += OnRetryButtonPressed;
+        _pauseMenu.QuitButtonPressed += OnQuitButtonPressed;
+        _pauseMenu.ContinueButtonPressed += OnContinueButtonPressed;
+        _pauseMenu.PauseButtonPressed += OnPauseButtonPressed;
     }
 
     private void Start()
@@ -68,9 +72,22 @@ public class GameController : MonoBehaviour
         Application.Quit();
     }
 
+    private void OnPauseButtonPressed()
+    {
+        SetPaused(true);
+        _pauseMenu.PauseButton();
+    }
+
     private void OnRetryButtonPressed()
     {
         _gameOverMenu.Hide();
+        SetPaused(false);
+        StartGame();
+    }
+
+    private void OnContinueButtonPressed()
+    {
+        _pauseMenu.HidePause();
         SetPaused(false);
         StartGame();
     }
@@ -79,5 +96,6 @@ public class GameController : MonoBehaviour
     {
         _tableController.RunTables();
         _money.StartWork();
+        //появляется кнопка
     }
 }
