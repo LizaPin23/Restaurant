@@ -11,22 +11,12 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        SetVisible(false);
     }
 
-    public void PauseButton()
+    public void SetVisible(bool value)
     {
-        PauseButtonPressed?.Invoke();
-    }
-
-    public void ShowPause()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void HidePause()
-    {
-        gameObject.SetActive(false);
+        gameObject.SetActive(value);
     }
 
     public void OnQuitButtonPressed()

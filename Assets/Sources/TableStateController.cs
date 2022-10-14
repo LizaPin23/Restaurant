@@ -52,8 +52,8 @@ public class TableStateController
         }
 
         TableState nextState = GetNextState();
-        bool startTimer = nextState != TableState.Empty;
-        SetState(nextState, startTimer);
+        //bool startTimer = nextState != TableState.Empty;
+        SetState(nextState, true);
     }
 
     private void SetState(TableState state, bool startTimer)

@@ -441,6 +441,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table1
       objectReference: {fileID: 0}
+    - target: {fileID: 3192318327995804577, guid: 98f4edc62ce435144a777859d0a333ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6868430897014449050, guid: 98f4edc62ce435144a777859d0a333ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -464,7 +469,7 @@ PrefabInstance:
     - target: {fileID: 8300183175219367443, guid: 98f4edc62ce435144a777859d0a333ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.87
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 8300183175219367443, guid: 98f4edc62ce435144a777859d0a333ca,
         type: 3}
@@ -1237,10 +1242,8 @@ RectTransform:
   - {fileID: 1044439031}
   - {fileID: 926191482}
   - {fileID: 1539769559}
-  - {fileID: 1027769096}
-  - {fileID: 1657739946}
   m_Father: {fileID: 1819836864}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1613,7 +1616,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 926191484}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 874717736}
+        m_MethodName: OnContinueButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &926191484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,6 +1721,7 @@ GameObject:
   - component: {fileID: 1027769099}
   - component: {fileID: 1027769098}
   - component: {fileID: 1027769097}
+  - component: {fileID: 1027769100}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -1723,14 +1738,15 @@ RectTransform:
   m_GameObject: {fileID: 1027769095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99992, y: 0.99992, z: 0.99992}
-  m_Children: []
-  m_Father: {fileID: 874717733}
-  m_RootOrder: 3
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1657739946}
+  m_Father: {fileID: 1819836864}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -898.9281, y: -494.96045}
+  m_AnchoredPosition: {x: -899, y: -495}
   m_SizeDelta: {x: 123.28906, y: 96.06429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027769097
@@ -1775,7 +1791,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1027769098}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1027769100}
+        m_MethodName: OnPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1027769098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1813,6 +1840,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027769095}
   m_CullTransparentMesh: 0
+--- !u!114 &1027769100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027769095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39368af82684f3438bc253d22806b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044439030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,7 +2875,7 @@ RectTransform:
   m_Children:
   - {fileID: 668099023}
   m_Father: {fileID: 1819836864}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2990,7 +3029,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1539769561}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 874717736}
+        m_MethodName: OnQuitButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1539769561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3199,7 +3249,7 @@ PrefabInstance:
     - target: {fileID: 8520266467502583627, guid: 765ed06b0a3087b429a62e2f2f16cc3a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.32
+      value: -1.85
       objectReference: {fileID: 0}
     - target: {fileID: 8520266467502583627, guid: 765ed06b0a3087b429a62e2f2f16cc3a,
         type: 3}
@@ -3276,15 +3326,15 @@ RectTransform:
   m_GameObject: {fileID: 1657739945}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99992, y: 0.99992, z: 0.99992}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 874717733}
-  m_RootOrder: 4
+  m_Father: {fileID: 1027769096}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -898.9281, y: -494.96045}
-  m_SizeDelta: {x: -1796.7109, y: -983.9357}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
+  m_SizeDelta: {x: -0.8363037, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657739947
 MonoBehaviour:
@@ -3606,6 +3656,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1027769096}
   - {fileID: 1515193158}
   - {fileID: 2027014127}
   - {fileID: 874717733}
@@ -3808,7 +3859,7 @@ RectTransform:
   - {fileID: 1344082483}
   - {fileID: 1557004413}
   m_Father: {fileID: 1819836864}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4061,6 +4112,7 @@ MonoBehaviour:
   _movementPlayer: {fileID: 1075954753}
   _gameOverMenu: {fileID: 2027014130}
   _pauseMenu: {fileID: 874717736}
+  _pauseButton: {fileID: 1027769100}
 --- !u!4 &2091963136
 Transform:
   m_ObjectHideFlags: 0

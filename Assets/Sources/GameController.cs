@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     [Header("Menus")] 
     [SerializeField] private GameOverMenu _gameOverMenu;
     [SerializeField] private PauseMenu _pauseMenu;
+    [SerializeField] private PauseButton _pauseButton;
 
     public event Action<bool> OnPauseChanged;
 
@@ -27,22 +28,34 @@ public class GameController : MonoBehaviour
         _inputController.ImputMovement += _movementPlayer.Move;
         _tableController.VisitorFailed += _money.VisitorDecrease;
         _money.GameOver += OnGameOver;
-        _inputController.ButtonEscapePressed += OnEscapePressed;
+
         _gameOverMenu.QuitButtonPressed += OnQuitButtonPressed;
         _gameOverMenu.RetryButtonPressed += OnRetryButtonPressed;
+
         _pauseMenu.QuitButtonPressed += OnQuitButtonPressed;
         _pauseMenu.ContinueButtonPressed += OnContinueButtonPressed;
-        _pauseMenu.PauseButtonPressed += OnPauseButtonPressed;
+        _pauseMenu.PauseButtonPressed += OnPausePressed;
+
+        _inputController.ButtonEscapePressed += OnPausePressed;
+        _pauseButton.Pressed += OnPausePressed;
     }
 
     private void Start()
     {
+        DoPause(false);
         StartGame();
     }
 
-    private void OnEscapePressed()
+    private void OnPausePressed()
     {
-        SetPaused(!_pause);
+        DoPause(!_pause);
+    }
+
+    private void DoPause(bool value)
+    {
+        SetPaused(value);
+        _pauseButton.SetVisible(!_pause);
+        _pauseMenu.SetVisible(_pause);
     }
 
     private void SetPaused(bool value)
@@ -72,12 +85,6 @@ public class GameController : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnPauseButtonPressed()
-    {
-        SetPaused(true);
-        _pauseMenu.PauseButton();
-    }
-
     private void OnRetryButtonPressed()
     {
         _gameOverMenu.Hide();
@@ -87,9 +94,7 @@ public class GameController : MonoBehaviour
 
     private void OnContinueButtonPressed()
     {
-        _pauseMenu.HidePause();
-        SetPaused(false);
-        StartGame();
+        DoPause(false);
     }
 
     private void StartGame()
