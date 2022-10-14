@@ -6,6 +6,7 @@ using UnityEngine;
 public class Money : MonoBehaviour
 {
     [SerializeField] private MoneyTextView _view;
+    [SerializeField] private AudioSource _audio;
 
     public event Action GameOver;
 
@@ -33,6 +34,7 @@ public class Money : MonoBehaviour
         }
 
         _value += value;
+        _audio.Play();
         _view.ShowValue(_value);
     }
 

@@ -7,6 +7,7 @@ public class Table : MonoBehaviour
     [SerializeField] private TableAnimator _animator;
     [SerializeField] private Timer _timer;
     [SerializeField] private ParticleSystem _moneyEffect;
+    [SerializeField] private AudioSource _audio;
 
     public event Action<Table, bool> IsDone;
 
@@ -103,6 +104,7 @@ public class Table : MonoBehaviour
         else
         {
             _tableStateController.ForceState(TableState.VisitorLeaving);
+            _audio.Play();
         }
     }
 }

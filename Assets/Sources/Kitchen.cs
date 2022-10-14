@@ -6,6 +6,7 @@ public class Kitchen : MonoBehaviour
 {
     [SerializeField] private FoodConfig _config;
     [SerializeField] private ParticleSystem _effect;
+    [SerializeField] private AudioSource _audio;
     [SerializeField] private SpriteRenderer _foodIcon;
 
     private void Start()
@@ -26,5 +27,7 @@ public class Kitchen : MonoBehaviour
 
         if(_effect != null && success)
             _effect.Play();
+        if (_audio != null && success)
+            _audio.Play();
     }
 }
