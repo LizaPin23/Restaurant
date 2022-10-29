@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
 
     public void Stop()
     {
+        TimeIsOff = null;
         StopAllCoroutines();
     }
 

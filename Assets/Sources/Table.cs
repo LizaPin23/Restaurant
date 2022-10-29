@@ -9,46 +9,52 @@ public class Table : MonoBehaviour
     [SerializeField] private ParticleSystem _moneyEffect;
     [SerializeField] private AudioSource _audio;
 
-    public event Action<Table, bool> IsDone;
+    public event Action<Table> IsDone;
+    public event Action VisitorLeft;
+    public event Action<Food> OrderServed;
 
     private TableStateController _tableStateController;
     private Menu _menu;
     private Food _currentOrder;
     private TableState _currentState;
-    private bool _correctFood;
 
     public void Initialize(Menu menu, TableConfig tableConfig)
     {
         _menu = menu;
         _tableStateController = new TableStateController(tableConfig, _timer);
-        
     }
 
     public void StartWork()
     {
-        _tableStateController.StateChanged += OnTableStateChanged;
-        _correctFood = false;
         _tableStateController.StartChain();
+        _tableStateController.StateChanged += OnTableStateChanged;
+        _tableStateController.TableIsDone += OnTableIsDone;
+        _tableStateController.ForceLeavingState += OnVisitorLeft;
+    }
+
+    private void OnVisitorLeft()
+    {
+        VisitorLeft?.Invoke();
+        _audio.Play();
+    }
+
+    private void OnTableIsDone()
+    {
+        IsDone?.Invoke(this);
+        _animator.SetEmpty();
+        _bubble.SetEmpty();
     }
 
     public void Clear()
     {
-        _currentState = TableState.Empty;
         _animator.SetEmpty();
         _bubble.SetEmpty();
-        _tableStateController.StateChanged -= OnTableStateChanged;
-        _tableStateController.StopChain();
+        _timer.Stop();
     }
 
     private void OnTableStateChanged(TableState state)
     {
         _bubble.SetTableState(state);
-
-        if (state == TableState.Empty && _currentState == TableState.VisitorLeaving)
-        {
-            IsDone?.Invoke(this, _correctFood);
-        }
-
         _currentState = state;
 
         switch (state)
@@ -94,17 +100,18 @@ public class Table : MonoBehaviour
         if (player.HasFood == false)
             return;
 
-        _correctFood = player.TryServeFood(_currentOrder);
+        var correctFoodServed = player.TryServeFood(_currentOrder);
 
-        if (_correctFood)
+        if (correctFoodServed)
         {
             _moneyEffect.Play();
             _tableStateController.ForceState(TableState.Eating);
+            OrderServed?.Invoke(_currentOrder);
         }
         else
         {
             _tableStateController.ForceState(TableState.VisitorLeaving);
-            _audio.Play();
+            OnVisitorLeft();
         }
     }
 }

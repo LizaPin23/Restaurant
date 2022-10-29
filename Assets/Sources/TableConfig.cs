@@ -7,10 +7,8 @@ public class TableConfig : ScriptableObject
     [SerializeField] private int _maxEmptyTime = 3;
     [SerializeField] private int _minPrepareTime = 4;
     [SerializeField] private int _maxPrepareTime = 6;
-    [SerializeField] private int _minWaitForPlayerTime = 6;
-    [SerializeField] private int _maxWaitForPlayerTime = 10;
-    [SerializeField] private int _minWaitForFoodTime = 10;
-    [SerializeField] private int _maxWaitForFoodTime = 16;
+    [SerializeField] private int _waitForPlayerTime = 6;
+    [SerializeField] private int _waitForFoodTime = 10;
     [SerializeField] private int _minEatingTime = 3;
     [SerializeField] private int _maxEatingTime = 5;
 
@@ -27,9 +25,9 @@ public class TableConfig : ScriptableObject
             case TableState.Prepare:
                 return GetRandomTime(_minPrepareTime, _maxPrepareTime);
             case TableState.WaitForPlayer:
-                return GetRandomTime(_minWaitForPlayerTime, _maxWaitForPlayerTime);
+                return _waitForPlayerTime;
             case TableState.WaitForFood:
-                return GetRandomTime(_minWaitForFoodTime, _maxWaitForFoodTime);
+                return _waitForFoodTime;
             case TableState.Eating:
                 return GetRandomTime(_minEatingTime, _maxEatingTime);
             case TableState.VisitorComing:

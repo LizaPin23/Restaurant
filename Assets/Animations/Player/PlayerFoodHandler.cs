@@ -27,15 +27,8 @@ public class PlayerFoodHandler : MonoBehaviour
 
     public bool TryServeFood(Food expectedFood)
     {
-        if (expectedFood.Type == CurrentFood.Type)
-        {
-            Debug.Log("Должны получить деньги");
-            _money.Increase(expectedFood.TablePrice);
-            CurrentFood = null;
-            return true;
-        }
-
+        var result = expectedFood.Type == CurrentFood.Type;
         CurrentFood = null;
-        return false;
+        return result;
     }
 }

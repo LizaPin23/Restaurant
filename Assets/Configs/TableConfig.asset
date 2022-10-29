@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d9e2aa5970ca04a8273e57c1b3746d, type: 3}
   m_Name: TableConfig
   m_EditorClassIdentifier: 
-  _minEmptyTime: 1
-  _maxEmptyTime: 3
+  _minEmptyTime: 3
+  _maxEmptyTime: 5
   _minPrepareTime: 4
   _maxPrepareTime: 6
-  _minWaitForPlayerTime: 6
-  _maxWaitForPlayerTime: 10
-  _minWaitForFoodTime: 10
-  _maxWaitForFoodTime: 16
+  _waitForPlayerTime: 10
+  _waitForFoodTime: 10
   _minEatingTime: 3
   _maxEatingTime: 5
+  _visitorComingDuration: 2
+  _visitorLeavingDuration: 2

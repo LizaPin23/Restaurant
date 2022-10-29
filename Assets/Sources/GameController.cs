@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
 
         _inputController.ImputMovement += _movementPlayer.Move;
         _tableController.VisitorFailed += _money.VisitorDecrease;
+        _tableController.MoneyAdded += _money.Increase;
         _money.GameOver += OnGameOver;
 
         _gameOverMenu.QuitButtonPressed += OnQuitButtonPressed;

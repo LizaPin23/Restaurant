@@ -10,6 +10,8 @@ public class TableController : MonoBehaviour
     [SerializeField] private int _activeTables = 2;
 
     public event Action VisitorFailed;
+    public event Action<int> MoneyAdded;
+
 
     private List<Table> _emptyTables;
 
@@ -19,8 +21,19 @@ public class TableController : MonoBehaviour
         {
             Table table = _tables[i];
             table.Initialize(_menu, tableConfig);
-            table.IsDone += OnTableIsDone;
+            table.VisitorLeft += TableOnVisitorLeft;
+            table.OrderServed += TableOnOrderServed;
         }
+    }
+
+    private void TableOnOrderServed(Food food)
+    {
+        MoneyAdded?.Invoke(food.TablePrice);
+    }
+
+    private void TableOnVisitorLeft()
+    {
+        VisitorFailed?.Invoke();
     }
 
     public void RunTables()
@@ -52,16 +65,13 @@ public class TableController : MonoBehaviour
         Table table = _emptyTables[index];
         _emptyTables.RemoveAt(index);
         table.StartWork();
+        table.IsDone += OnTableIsDone;
     }
 
-    private void OnTableIsDone(Table table, bool success)
+    private void OnTableIsDone(Table table)
     {
+        table.IsDone -= OnTableIsDone;
         _emptyTables.Add(table);
         RunRandomTable();
-
-        if (success == false)
-        {
-            VisitorFailed?.Invoke();
-        }
     }
 }
